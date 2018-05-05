@@ -5,17 +5,15 @@ import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
 
-const pkg = require('./package.json')
+import pkg = require('./package.json')
 
 const libraryName = '--libraryname--'
 
 export default {
-  input: `src/${libraryName}.ts`,
+  input: `src/index.ts`,
   output: [
-    { file: pkg.main, name: camelCase(libraryName), format: 'umd' },
-    { file: pkg.module, format: 'es' },
+    {file: `dist/${libraryName}.js`, sourcemap: true, name: camelCase(libraryName), format: 'umd'},
   ],
-  sourcemap: true,
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
   external: [],
   watch: {
